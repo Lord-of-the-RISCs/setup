@@ -1,0 +1,9 @@
+[submodule "circt"]
+	path = circt
+	url = https://github.com/Lord-of-the-RISCs/circt
+[submodule "yosys"]
+	path = yosys
+	url = https://github.com/YosysHQ/yosys.git
+[submodule "spechls-circt"]
+	path = spechls-circt
+	url = https://github.com/sderrien/spechls-circt.git
