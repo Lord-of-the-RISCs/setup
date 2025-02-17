@@ -36,4 +36,4 @@ gecos-hls:
 
 init:
 	mkdir -p prefix
-	git submodule update --init --recursive
+	git submodule update --progress --init --recursive
