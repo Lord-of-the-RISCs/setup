@@ -6,7 +6,7 @@ all: yosys llvm circt specHLS-circt
 
 yosys: init
 	sed -i -e 's|ENABLE_LIBYOSYS := 0|ENABLE_LIBYOSYS := 1|g' yosys/Makefile
-	$(MAKE) -C yosys
+	$(MAKE) -C yosys -j$(nproc)
 
 llvm-init: init
 	mkdir -p $(PWD)/circt/llvm/build
