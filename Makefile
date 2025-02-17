@@ -1,8 +1,8 @@
-.PHONY: all yosys llvm circt specHLS-circt gecos-hls init test
+.PHONY: all yosys llvm circt specHLS-circt init
 
 pwd = $(PWD)
 
-all: yosys llvm circt specHLS-circt gecos-hls
+all: yosys llvm circt specHLS-circt
 
 yosys: init
 	sed -i -e 's|ENABLE_LIBYOSYS := 0|ENABLE_LIBYOSYS := 1|g' yosys/Makefile
@@ -16,7 +16,7 @@ llvm-init: init
 llvm: llvm-init
 	cd $(PWD)/circt/llvm/build/; cmake --build . --target install
 
-circt-init: llvm init
+circt-init: init llvm
 	mkdir -p $(PWD)/circt/build
 	cd $(PWD)/circt/build; cmake -G Ninja .. -DMLIR_DIR="$(PWD)/circt/llvm/build/lib/cmake/mlir" -DLLVM_DIR="$(PWD)/circt/llvm/build/lib/cmake/llvm" -DCMAKE_BUILD_TYPE=Debug -DLLVM_ENABLE_LLD=ON -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX="$(PWD)/prefix/"
 
@@ -29,10 +29,6 @@ specHLS-circt-init: init circt
 
 specHLS-circt: specHLS-circt-init
 	cd $(PWD)/spechls-circt/build;	cmake --build . --target install
-
-gecos-hls:
-	git clone https://gitlab.inria.fr/gecos/gecos-hls.git
-	bash install-eclipse-dependency.sh $(PWD)
 
 init:
 	mkdir -p prefix
