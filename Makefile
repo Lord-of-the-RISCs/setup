@@ -4,7 +4,7 @@ pwd = $(PWD)
 
 all: yosys llvm circt specHLS-circt gecos-hls
 
-yosys:
+yosys: init
 	sed -i -e 's|ENABLE_LIBYOSYS := 0|ENABLE_LIBYOSYS := 1|g' yosys/Makefile
 	$(MAKE) -C yosys
 
@@ -23,7 +23,7 @@ circt-init: llvm init
 circt: circt-init
 	cd $(PWD)/circt/build; cmake --build . --target install
 
-specHLS-circt-init: init
+specHLS-circt-init: init circt
 	mkdir -p $(PWD)/spechls-circt/build
 	cd $(PWD)/spechls-circt/build; cmake -G Ninja .. -DYOSYS_LIBRARY_DIR="$(PWD)/yosys" -DYOSYS_INCLUDE_DIR="$(PWD)/yosys/share/include" -DMLIR_DIR="$(PWD)/prefix/lib/cmake/mlir" -DCIRCT_DIR="$(PWD)/prefix/lib/cmake/circt" -DLLVM_EXTERNAL_LIT="$(PWD)/circt/llvm/build/bin/llvm-lit" -DLLVM_ENABLE_LLD=ON -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX="$(PWD)/prefix/"
 
