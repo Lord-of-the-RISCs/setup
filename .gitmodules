@@ -6,4 +6,4 @@
 	url = https://github.com/YosysHQ/yosys.git
 [submodule "spechls-circt"]
 	path = spechls-circt
-	url = https://github.com/sderrien/spechls-circt.git
+	url = https://github.com/Lord-of-the-RISCs/spechls-circt.git
