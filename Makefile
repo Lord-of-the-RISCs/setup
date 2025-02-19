@@ -24,7 +24,7 @@ circt: circt-init
 
 specHLS-circt-init: init circt
 	mkdir -p $(PWD)/spechls-circt/build
-	cd $(PWD)/spechls-circt/build; cmake -G Ninja .. -DYOSYS_LIBRARY_DIR="$(PWD)/yosys" -DYOSYS_INCLUDE_DIR="$(PWD)/yosys/share/include" -DMLIR_DIR="$(PWD)/prefix/lib/cmake/mlir" -DCIRCT_DIR="$(PWD)/prefix/lib/cmake/circt" -DLLVM_EXTERNAL_LIT="$(PWD)/circt/llvm/build/bin/llvm-lit" -DLLVM_ENABLE_LLD=ON -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX="$(PWD)/prefix/" -DUSE_ALTERNATE_LINKER=mold
+	cd $(PWD)/spechls-circt/build; cmake -G Ninja .. -DYOSYS_LIBRARY_DIR="$(PWD)/yosys" -DYOSYS_INCLUDE_DIR="$(PWD)/yosys" -DMLIR_DIR="$(PWD)/prefix/lib/cmake/mlir" -DCIRCT_DIR="$(PWD)/prefix/lib/cmake/circt" -DLLVM_EXTERNAL_LIT="$(PWD)/circt/llvm/build/bin/llvm-lit" -DLLVM_ENABLE_LLD=ON -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX="$(PWD)/prefix/" -DUSE_ALTERNATE_LINKER=mold
 
 specHLS-circt: specHLS-circt-init
 	cd $(PWD)/spechls-circt/build;	cmake --build . --target install
