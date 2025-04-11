@@ -25,6 +25,7 @@ export ROOT_DIR="$PWD"
 
 # Build Yosys
 make -C yosys -j$(nproc)
+make -C yosys install PREFIX="$PREFIX"
 
 # Build LLVM
 mkdir -p circt/llvm/build && cd circt/llvm/build
