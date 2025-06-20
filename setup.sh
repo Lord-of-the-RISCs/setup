@@ -20,7 +20,7 @@ git submodule update --progress --init --recursive
 git submodule update --remote
 
 mkdir -p prefix
-export PREFIX="$PWD/prefix"
+export PREFIX=${PREFIX:-"$PWD/prefix"}
 export ROOT_DIR="$PWD"
 
 # Build Yosys
