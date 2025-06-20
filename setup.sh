@@ -4,22 +4,22 @@ set -euo pipefail
 
 install=0
 cmake_build_type="Debug"
-llvm_cmake_build_type="Release"
+llvm_cmake_build_type="RelWithDebInfo"
 
-while getopts "h?idD" opt; do
+while getopts "h?irR" opt; do
   case "$opt" in
   h | \?)
-    echo -e "Usage: $0 [-i]\n\nOptions:\n    -i    Install to prefix\n    -r    Build spechls-circt in release mode\n    -D    Build LLVM with debug information"
+    echo -e "Usage: $0 [-i]\n\nOptions:\n    -i    Install to prefix\n    -r    Build spechls-circt in release mode\n    -R    Build LLVM without debug information"
     exit 0
     ;;
   i)
     install=1
     ;;
-  d)
+  r)
     cmake_build_type="Release"
     ;;
-  D)
-    llvm_cmake_build_type="RelWithDebInfo"
+  R)
+    llvm_cmake_build_type="Release"
     ;;
   esac
 done
