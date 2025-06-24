@@ -10,7 +10,7 @@ llvm_cmake_build_type="RelWithDebInfo"
 while getopts "h?irRc" opt; do
   case "$opt" in
   h | \?)
-    echo -e "Usage: $0 [-i]\n\nOptions:\n    -i    Install to prefix\n    -r    Build spechls-circt in release mode\n    -R    Build LLVM without debug information\n    -c    Clean intermediate build files"
+    echo -e "Usage: $0 [-irRc]\n\nOptions:\n    -i    Install to prefix\n    -r    Build spechls-circt in release mode\n    -R    Build LLVM without debug information\n    -c    Clean intermediate build files"
     exit 0
     ;;
   i)
