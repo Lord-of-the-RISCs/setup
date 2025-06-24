@@ -46,9 +46,6 @@ cmake --build .
 if [ "$install" -eq 1 ]; then
   cmake --build . --target install
 fi
-if [ "$clean" -eq 1 ]; then
-  cmake --build . --target clean
-fi
 cd "$ROOT_DIR"
 
 # Build CIRCT
@@ -57,9 +54,6 @@ cmake -G Ninja .. -DMLIR_DIR="$ROOT_DIR/circt/llvm/build/lib/cmake/mlir" -DLLVM_
 cmake --build .
 if [ "$install" -eq 1 ]; then
   cmake --build . --target install
-fi
-if [ "$clean" -eq 1 ]; then
-  cmake --build . --target clean
 fi
 cd "$ROOT_DIR"
 
@@ -70,6 +64,16 @@ cmake --build .
 if [ "$install" -eq 1 ]; then
   cmake --build . --target install
 fi
+cd "$ROOT_DIR"
+
 if [ "$clean" -eq 1 ]; then
+  cd circt/llvm/build
   cmake --build . --target clean
+  cd "$ROOT_DIR"
+  cd circt/build
+  cmake --build . --target clean
+  cd "$ROOT_DIR"
+  cd spechls-circt/build
+  cmake --build . --target clean
+  cd "$ROOT_DIR"
 fi
