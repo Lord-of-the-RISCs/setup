@@ -3,13 +3,14 @@
 set -euo pipefail
 
 install=0
+clean=0
 cmake_build_type="Debug"
 llvm_cmake_build_type="RelWithDebInfo"
 
-while getopts "h?irR" opt; do
+while getopts "h?irRc" opt; do
   case "$opt" in
   h | \?)
-    echo -e "Usage: $0 [-i]\n\nOptions:\n    -i    Install to prefix\n    -r    Build spechls-circt in release mode\n    -R    Build LLVM without debug information"
+    echo -e "Usage: $0 [-i]\n\nOptions:\n    -i    Install to prefix\n    -r    Build spechls-circt in release mode\n    -R    Build LLVM without debug information\n    -c    Clean intermediate build files"
     exit 0
     ;;
   i)
@@ -20,6 +21,9 @@ while getopts "h?irR" opt; do
     ;;
   R)
     llvm_cmake_build_type="Release"
+    ;;
+  c)
+    clean=1
     ;;
   esac
 done
@@ -42,6 +46,9 @@ cmake --build .
 if [ "$install" -eq 1 ]; then
   cmake --build . --target install
 fi
+if [ "$clean" -eq 1 ]; then
+  cmake --build . --target clean
+fi
 cd "$ROOT_DIR"
 
 # Build CIRCT
@@ -51,6 +58,9 @@ cmake --build .
 if [ "$install" -eq 1 ]; then
   cmake --build . --target install
 fi
+if [ "$clean" -eq 1 ]; then
+  cmake --build . --target clean
+fi
 cd "$ROOT_DIR"
 
 # Build spechls-circt
@@ -59,4 +69,7 @@ cmake -G Ninja .. -DCMAKE_BUILD_TYPE="$cmake_build_type" -DYosys_LIBRARY="$ROOT_
 cmake --build .
 if [ "$install" -eq 1 ]; then
   cmake --build . --target install
+fi
+if [ "$clean" -eq 1 ]; then
+  cmake --build . --target clean
 fi
