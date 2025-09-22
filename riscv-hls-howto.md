@@ -25,7 +25,7 @@ First, we need to get the Embench IOT code:
 cd "$WORKING_DIR"
 git clone --branch embench-1.0 git@github.com:embench/embench-iot.git
 cd embench-iot
-/build_all.py --arch riscv32 --chip generic --board ri5cyverilator --cc riscv32-unknown-elf-gcc --cflags="-c -O2 -ffunction-sections -march=rv32i_zicsr -mabi=ilp32" --ldflags="-Wl,-gc-sections" --user-libs="-lm"
+/build_all.py --arch riscv32 --chip generic --board ri5cyverilator --cc riscv32-unknown-elf-gcc --cflags="-c -O2 -ffunction-sections -march=rv32i -mabi=ilp32" --ldflags="-Wl,-gc-sections" --user-libs="-lm"
 ```
 
 ## Running the RISCV-HLS Gecos benchmark
