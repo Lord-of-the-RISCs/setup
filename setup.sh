@@ -50,7 +50,7 @@ cd "$ROOT_DIR"
 
 # Build CIRCT
 mkdir -p circt/build && cd circt/build
-cmake -G Ninja .. -DMLIR_DIR="$ROOT_DIR/circt/llvm/build/lib/cmake/mlir" -DLLVM_DIR="$ROOT_DIR/circt/llvm/build/lib/cmake/llvm" -DCMAKE_BUILD_TYPE="$llvm_cmake_build_type" -DLLVM_ENABLE_LLD=ON -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX="$PREFIX"
+cmake -G Ninja .. -DMLIR_DIR="$ROOT_DIR/circt/llvm/build/lib/cmake/mlir" -DLLVM_DIR="$ROOT_DIR/circt/llvm/build/lib/cmake/llvm" -DCMAKE_BUILD_TYPE="$llvm_cmake_build_type" -DLLVM_ENABLE_LLD=ON -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX="$PREFIX" -DCIRCT_SLANG_FRONTEND_ENABLED=ON
 cmake --build .
 if [ "$install" -eq 1 ]; then
   cmake --build . --target install
